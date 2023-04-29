@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Weather App</title>
+    <style>
+      .headding{
+        color:blue;
+        text-decoration: none;
+      }
+      #weather-card {
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 390px;
+        width: 350px;
+        margin: auto;
+        background-color:rgb(200, 255, 255);
+      }
+
+      .location {
+        padding: 20px;
+      }
+
+      .location h2 {
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .location p {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .conditions {
+        padding: 20px;
+      }
+
+      .conditions h3 {
+        font-size: 24px;
+        margin: 0 0 10px 0;
+      }
+
+      .conditions img {
+        height: 60px;
+        margin-right: 20px;
+      }
+
+      .conditions p {
+        font-size: 18px;
+        margin: 5px 0;
+      }
+      #city{
+          color:rgb(249, 59, 6);
+      }
+      #date_time{
+          color:#04781d;
+      }
+      .bg-light{
+        background-color:palegreen !important;
+
+      }
+      tr:nth-child(even){background-color: #f2f2f2}
+      tr:hover{
+        background-color:cornflowerblue;
+        color: white;
+      }
+
+  </style>
+</head>
+<body style="background-color: rgb(212, 239, 232);">
+  <script>
+    let bool=true;
+  </script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color:rgb(199, 30, 171);text-decoration: none;font-weight:600;" href="#" onclick="f1()">Wether of Yout City</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <br>
+            <form class="d-flex">
+              <input id="secific_search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" width="150px">
+              <button id="search_button"class="btn btn-outline-primary" type="submit" onclick="valid()">Search</button>
+            </form>
+            <br>
+          </div>
+        </div>
+      </nav>
+
+      <br>
+      <div id="weather-card">
+        <div class="location">
+          <h2 id="city">New York City</h2>
+          <p id="date_time"></p>
+        </div>
+        <div class="conditions">
+            <div style="float:left;width:50%;height:150px">
+                <h3 style="color:deeppink">Temperature</h3>
+                <h1 id="temperature"style="margin-bottom: 1px;">10F</h1>
+                <p id="max_temp"style="font-size:14px;line-height:2ch;color:red">Max Temp</p>
+                <p id="min_temp"style="font-size:14px;line-height:2ch;color:green">Min Temp</p>
+            </div>
+            <div style="float: left;width:50%;height:150px;">
+                <h3 style="color:rgb(53, 40, 240);">Condition</h3>
+                <img height="8px" width="80px;"  src="sunny.png" alt="Cloudy">
+                <p id="cloude_condition" style="font-size:15px;"></p>
+            </div>
+            
+          <h5 style="line-height:20px;font-size:18px;color:crimson" id="humidity">Humidity:</h5>
+          <h5 style="line-height:20px;font-size:18px;color:blue" id="wind_speed">Wind Speed:</h5>
+          <h5 style="line-height:20px;font-size:18px;color:mediumseagreen;" id="sun_rise">Sun Rise:</h5>
+          <h5 style="line-height:20px;font-size:18px;color:darkmagenta;" id="sun_set">Sun Set:</h5>
+        </div>
+      </div>
+      <br><br>
+        <h2 class="display-6 text-center mb-4" style="font-weight: 500;color: crimson;">Wether of Famous Cities</h2>
+        <div class="table-responsive" style="margin-left: 5px;">
+          <table class="table text-center">
+            <thead>
+              <tr style="background-color: #04AA6D !important;color: white !important;">
+                <th width="12%"></th>
+                <th wodth="22%">Cloud %</th>
+                <th wodth="22%">Feels Like</th>
+                <th wodth="22%">Humadity</th>
+                <th wodth="22%">Temperature</th>
+                <th wodth="22%">Max Temperature</th>
+                <th wodth="22%">Min Temperature</th>
+                <th wodth="22%">Wind Speed</th>
+                <th wodth="22%">Wind Degree</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Delhi</th>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+                <td class="delhi_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Bangalore</th>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+                <td class="bengalore_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Mumbai</th>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+                <td class="mumbai_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Chennai</th>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+                <td class="chennai_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Hyderabad</th>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+                <td class="hyderabad_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Kolkata</th>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+                <td class="kolkata_wether"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Ahmedabad</th>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+                <td class="ahmedabad_wether"></td>
+              </tr><tr>
+                <th scope="row" class="text-start">Jaipur</th>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+                <td class="jaipur_wether"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    <script src="script.js"></script>
+    <script>
+        const day={
+              "Mon":"Monday","Tue":"Tuesday","Wed":"Wednesday","Thu":"Thursday","Fri":"Friday","Sat":"Saturday","Sun":"Sunday"
+          };
+          const mounth={
+              "Jan":"January","Fed":"February","Mar":"March","Apr":"April","May":"May","Jun":"June","Jul":"July","Aug":"August","Sep":"September","Oct":"October","Nov":"November","Dec":"December"
+          };
+        
+          let date=new Date().toDateString().split(" ");
+          const ele=document.getElementById("date_time");
+          ele.innerHTML=day[date[0]]+" "+date[2]+" "+mounth[date[1]]+" "+date[3]; 
+          const conditions = [
+            {name: 'Sunny', icon: "sunny.png"},
+            {name: 'Partly Sunny', icon: "partly_cloudy.png"},
+            {name: 'Cloudy', icon: "cloudy.png"},
+            {name: 'Rain', icon: "Rainy.png"},
+            {name: 'Snow', icon: "Snowy.png"},
+          ];
+            document.getElementById("search_button").addEventListener("click", function(event){
+            event.preventDefault();
+            });
+            let temp=[]
+            temp.push(document.getElementById("temperature"));
+            temp.push(document.getElementById("max_temp"));
+            temp.push(document.getElementById("min_temp"));
+            temp.push(document.getElementById("humidity"));
+            temp.push(document.getElementById("wind_speed"));
+            temp.push(document.getElementById("sun_rise"));
+            temp.push(document.getElementById("sun_set"));
+            CityName();
+            result()
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>
